@@ -65,7 +65,6 @@ def intel_reaper(plugin, vault_token, vault_url, vault_se, vault_name, input_fil
             processed_json["md5_hash"] = md5_hash
             del processed_json["report"]["analysis.content.mainObject.hashes"]
             del processed_json["report"]["analysis.content.mainObject.info"]
-            del processed_json["main"]["trid"]
             if "pe" in processed_json["main"]:
                 for pe_item in processed_json["main"]["pe"]:
                     pe_dict = flatten_dictionary_with_int(pe_item)
