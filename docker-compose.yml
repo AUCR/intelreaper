@@ -1,0 +1,72 @@
+version: "3.4"
+
+services:
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.5.4
+    container_name: kibana
+    ports:
+      - 5601:5601
+    environment:
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+      - xpack.ml.enabled=false
+      - xpack.watcher.enabled=false
+    networks:
+      - intelreaper
+    env_file:
+      - ./es-config-file.env
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+    container_name: elasticsearch
+    environment:
+      - cluster.name=intelreaper
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+      - xpack.ml.enabled=false
+      - xpack.watcher.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./es-data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - intelreaper
+    env_file:
+      - ./es-config-file.env
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=intelreaperadmin
+      - RABBITMQ_DEFAULT_PASSWORD=intelreaperadmin1234
+    ports:
+      - 5672:5672
+    networks:
+      - intelreaper
+    env_file:
+    - ./rabbitmq-config-file.env
+
+  vault:
+    image: vault
+    restart: always
+    ports:
+      - "8200:8200"
+    volumes:
+      - vault
+    environment:
+      - SERVER_NAME=localhost
+      - BACKEND=file
+      - VAULT_DEV_ROOT_TOKEN_ID=myroot
+    cap_add:
+      - IPC_LOCK
+
+networks:
+  intelreaper:
+    driver: bridge

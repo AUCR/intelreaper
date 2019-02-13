@@ -1,0 +1,21 @@
+info:
+  project_name: "intelreaper"
+  project_start_date: 02/11/2018
+  name: "intelreaper"
+  authors: "Wyatt Roersma"
+  authors_email: "wyatt@aucr.io"
+  description: "Intelreaper is a Cyber Intel Tool."
+  license: 'GPL-3.0'
+  classifiers:
+    - 'Development Status :: 4 - Beta'
+    - 'Intended Audience :: Developers'
+    - 'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)'
+    - 'Programming Language :: Python :: 3.7'
+  url: 'aucr.io'
+
+
+version:
+  major: 0
+  minor: 0
+  revision: 0
+  release: 2

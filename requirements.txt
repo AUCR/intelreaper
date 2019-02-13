@@ -1,0 +1,8 @@
+yamlinfo
+python-dotenv
+elasticsearch
+requests
+ujson
+click
+udatetime
+DataParserLib
