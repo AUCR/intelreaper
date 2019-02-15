@@ -1,0 +1,17 @@
+version: "3.4"
+
+services:
+  intelreaper:
+    user: intelreaper
+    container_name: intelreaper
+    image: intelreaper
+    networks:
+      - datanetwork
+    env_file:
+    - ./config-file.env
+    volumes:
+      - ./inteljson:/opt/intelreaper/inteljson
+
+networks:
+  datanetwork:
+    driver: bridge

@@ -1,0 +1,31 @@
+{
+    "index_patterns": "ar*",
+    "settings": {
+        "index": {
+            "mapping.coerce": true,
+            "number_of_shards": "1",
+            "codec": "best_compression",
+            "number_of_replicas": "0",
+            "mapping.total_fields.limit" : "2000",
+            "mapping.ignore_malformed": true
+        }
+    },
+    "mappings": {
+        "ar": {
+            "date_detection": false,
+            "dynamic_templates": [
+                {
+                    "not_analyzed": {
+                        "mapping": {
+                            "type": "keyword",
+                            "ignore_above": 32766
+                        },
+                        "match_mapping_type": "string",
+                        "match": "*"
+                    }
+                }
+            ]
+            }
+        }
+    }
+}

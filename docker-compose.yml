@@ -22,7 +22,7 @@ services:
     environment:
       - cluster.name=intelreaper
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - "ES_JAVA_OPTS=-Xms16g -Xmx16g"
       - xpack.security.enabled=false
       - xpack.monitoring.enabled=false
       - xpack.ml.enabled=false
@@ -59,7 +59,7 @@ services:
     ports:
       - "8200:8200"
     volumes:
-      - vault
+      - ./vault:/vault/file/
     environment:
       - SERVER_NAME=localhost
       - BACKEND=file
